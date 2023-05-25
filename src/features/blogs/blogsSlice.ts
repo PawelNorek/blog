@@ -1,6 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, nanoid } from "@reduxjs/toolkit"
+
+import { RootState } from "../../app/store"
 
 export interface BlogsState {
+  userId: string
   id: string
   title: string
   body: string
@@ -10,7 +13,7 @@ export interface BlogsState {
   }
 }
 
-const initialState: BlogsState[] = [
+const initialState: Array<BlogsState> = [
   {
     id: "1",
     title: "Basic Redux-Toolkit",
@@ -34,7 +37,32 @@ const initialState: BlogsState[] = [
 const blogsSlice = createSlice({
   name: "blogs",
   initialState,
-  reducers: {},
+  reducers: {
+    _addBlog: {
+      reducer(state: BlogsState[], action: { payload: any }) {
+        state.push(action.payload)
+      },
+      prepare(title: string, body: string) {
+        return {
+          payload: {
+            id: nanoid(),
+            title,
+            body,
+          },
+        }
+      },
+    },
+    get addBlog() {
+      return this._addBlog
+    },
+    set addBlog(value) {
+      this._addBlog = value
+    },
+  },
 })
+
+export const selectAllBlogs = (state: RootState) => state.blogs
+
+export const { addBlog } = blogsSlice.actions
 
 export default blogsSlice.reducer
