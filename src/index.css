@@ -11,3 +11,26 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+body {
+  min-height: 100vh;
+  font-size: 1.2rem;
+  padding: 0 10% 10%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+section {
+  margin-top: 1em;
+}
+
+input,
+textarea,
+button,
+select {
+  font: inherit;
+  margin-bottom: 1em;
+}

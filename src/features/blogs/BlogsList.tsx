@@ -2,15 +2,18 @@ import React from "react"
 import { useAppSelector } from "../../app/hooks"
 import BlogUser from "./BlogUser"
 import ResponseButtons from "./ResponseButtons"
+import { selectAllBlogs } from "./blogsSlice"
 
 const BlogsList = () => {
-  const blogs = useAppSelector((state) => state.blogs)
+  const blogs = useAppSelector(selectAllBlogs)
   const renderedBlogs = blogs.map((blog) => (
     <div key={blog.id} className="card">
       <div className="card-body">
         <h3>{blog.title}</h3>
         <p>{blog.body.substring(0, 100)}</p>
-        <p className="lead">{/* <BlogUser userId={blog.userId} /> */}</p>
+        <p className="lead">
+          <BlogUser userId={blog.userId || "unknow user"} />
+        </p>
         <ResponseButtons />
       </div>
     </div>
