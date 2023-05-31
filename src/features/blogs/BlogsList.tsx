@@ -12,7 +12,7 @@ const BlogsList = () => {
         <h3>{blog.title}</h3>
         <p>{blog.body.substring(0, 100)}</p>
         <p className="lead">
-          <BlogUser userId={blog.userId || "unknow user"} />
+          <BlogUser userId={blog.userId} />
         </p>
         <ResponseButtons />
       </div>

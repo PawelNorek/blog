@@ -16,6 +16,7 @@ export interface BlogsState {
 const initialState: Array<BlogsState> = [
   {
     id: "1",
+    userId: "2",
     title: "Basic Redux-Toolkit",
     body: "The Redux Toolkit package is intended to be the standard way to write Redux logic. It was originally created to help address three common concerns about Redux",
     response: {
@@ -25,6 +26,7 @@ const initialState: Array<BlogsState> = [
   },
   {
     id: "2",
+    userId: "1",
     title: "React Redux",
     body: "React Redux is maintained by the Redux team, and kept up-to-date with the latest APIs from Redux and React.",
     response: {
@@ -42,12 +44,13 @@ const blogsSlice = createSlice({
       reducer(state: BlogsState[], action: { payload: any }) {
         state.push(action.payload)
       },
-      prepare(title: string, body: string) {
+      prepare(title: string, body: string, userId: string) {
         return {
           payload: {
             id: nanoid(),
             title,
             body,
+            userId,
           },
         }
       },
