@@ -51,6 +51,10 @@ const blogsSlice = createSlice({
             title,
             body,
             userId,
+            response: {
+              like: 0,
+              unlike: 0,
+            },
           },
         }
       },
@@ -61,11 +65,18 @@ const blogsSlice = createSlice({
     set addBlog(value) {
       this._addBlog = value
     },
+    responseAdded(state, action) {
+      const { blogId, response } = action.payload
+      const existingBlog = state.find((blog) => blog.id === blogId)
+      if (existingBlog) {
+        existingBlog.response[response]++
+      }
+    },
   },
 })
 
 export const selectAllBlogs = (state: RootState) => state.blogs
 
-export const { addBlog } = blogsSlice.actions
+export const { addBlog, responseAdded } = blogsSlice.actions
 
 export default blogsSlice.reducer
